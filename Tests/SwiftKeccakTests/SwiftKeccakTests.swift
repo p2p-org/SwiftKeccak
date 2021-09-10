@@ -1,5 +1,6 @@
 import XCTest
 @testable import SwiftKeccak
+import Base58Swift
 
 final class SwiftKeccakTests: XCTestCase {
 
@@ -11,12 +12,9 @@ final class SwiftKeccakTests: XCTestCase {
         print("tearDown ...")
     }
 
-    func swiftKeccak_Keccak_keccak256() {
-        let hash: Data = keccak256("hello")
-
-        print("hash: \(hash)")
-
-        XCTAssertEqual("hello", "hello")
+    func testSwiftKeccak_Keccak_keccak256() throws {
+        let hash: Data = keccak256("BTC/toSolana")
+        XCTAssertEqual(Base58.base58Encode([UInt8](hash)), "2XWUS8dNzaAFeDk6e6Q4dsojE3n9jncAZ9nNBpCJWEgZ")
 
     }
 //    func testExample() {
@@ -27,6 +25,6 @@ final class SwiftKeccakTests: XCTestCase {
 //    }
 
     static var allTests = [
-        ("swiftKeccak_Keccak_keccak256", swiftKeccak_Keccak_keccak256),
+        ("swiftKeccak_Keccak_keccak256", testSwiftKeccak_Keccak_keccak256),
     ]
 }
